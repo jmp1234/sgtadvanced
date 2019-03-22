@@ -10,7 +10,7 @@ const server = express(); //you now have a server! express is running node
 
 server.use( express.static( __dirname + '/html' ) ); //middleware //looks in the html folder for a file called index.html, and grabs that file and serves it
 server.use( express.urlencoded( { extended: false } )) //have express pull body data that is urlencoded and place it into an object called body
-
+//when using Axios: use server.use(express.json())
 
 //ex: in the url, I can add /components/students.js to read that file on the browser
 
@@ -45,7 +45,40 @@ server.get( '/api/grades', ( req, res ) => {
 }) //the api name doesn't matter - it can be named anything
 
 server.post( '/api/grades', ( request, response ) => {
+  //check the body object andd see if any data was not sent
+  if(request.body.name === undefined || request.body.course === undefined || request.body.grade === undefined) {
+    //respons to the client with an appropropriate error message
+    response.send({
+      success: false,
+      error: 'invalid name, course, or grade'
+    });
 
+    return;
+  }
+  //connect to the database
+  db.connect( () => {
+
+    const name = request.body.name.split(' ');
+
+    const query = "INSERT INTO `grades` SET `surname`='"+name.slice(1).join(' ')+"', `givenname`='"+name[0]+"', `course`='"+request.body.course+"', `grade`='"+request.body.grade+"', `added`=NOW()";
+    // alternate way: INSERT INTO `grades` (`surname`, `givenname`, `course`, `grade`) VALUES ("John", "Pham", "math", 80), ("Johny", "Phammm", "math", 40)
+
+    db.query( query, ( error, result ) => {
+      if( !error ) {
+        response.send({
+          success: true,
+          new_id: result.insertId
+        })
+      } else {
+        response.send({
+          success: false,
+          error
+        })
+      }
+    })
+
+
+  })
 })
 
 server.listen( 3001, () => { //port and callback function
