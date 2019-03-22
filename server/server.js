@@ -19,7 +19,6 @@ server.get( '/', ( request, response ) => {//endpoint 1: localhost:3001/
   //an object representing all of the data coming from the client to the server
   //an object representing all of the data going from the server to the client
   response.send('Hello, World')
-
 })
 
 server.get('/time', ( request, response) => { //endpoint 2: localhost:3001/time

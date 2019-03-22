@@ -1,0 +1,190 @@
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin: 0;
+}
+
+button {
+  border-radius: 5px;
+  padding: 7px;
+  cursor: pointer;
+}
+
+/* PAGE HEADER */
+
+.page-header > h3 {
+  display: none;
+}
+
+.page-header > h1 {
+  margin-left: 3%;
+  font-weight: normal;
+}
+
+.page-header > h1 > small {
+  position: absolute;
+  right: 5%;
+}
+.page-header small {
+  color: grey;
+}
+
+.media-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+  border-bottom: 1px solid grey;
+}
+
+/* DISPLAY AREA */
+
+.student-body-container {
+  transform: rotate(180deg);
+  text-align: right;
+  font-size: 0;
+}
+
+.student-add-form, .student-list-container {
+  display: inline-block;
+  transform: rotate(-180deg);
+  font-size: 1rem;
+}
+
+.student-add-form {
+  width: 25%;
+  text-align: left;
+}
+
+.student-add-form > * {
+  margin-left: 10px;
+}
+
+#displayArea button {
+  background-color: red;
+  color: white;
+}
+
+
+/* INPUT AREA */
+
+input {
+  width: 90%;
+  margin-bottom: 15px;
+  height: 34px;
+  border-radius: 5px;
+}
+
+.student-list-container {
+  width: 75%;
+}
+
+.student-list {
+  width: 100%;
+}
+
+.student-list tr th {
+  padding-left: 35px;
+  padding-right: 35px;
+  position: relative;
+  width: 20%;
+  text-align: center;
+}
+
+.student-list td {
+  text-align: center;
+}
+/* .student-list tr:nth-child(1) {
+  background-color: red;
+} */
+
+#addButton {
+  background-color: green;
+  color: white;
+}
+#serverButton {
+  background-color: blue;
+  color: white;
+}
+.student-add-form button {
+  padding: 10px;
+}
+
+/* MODAL */
+.errorModalShadow {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(255, 135, 136, 0.3);
+  position: fixed;
+  top: 0;
+  display: none;
+}
+
+.errorModal {
+  position: absolute;
+  top: 20%;
+  left: 58%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #832A0D;
+  height: 20vh;
+  width: 20vw;
+  background-color: silver;
+}
+
+.errorModal > h2 {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*LOAD*/
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  animation: spin 2s linear infinite;
+  position: relative;
+  left: 50%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 1200px) {
+  .student-body-container {
+    transform: rotate(0);
+  }
+
+  .student-add-form, .student-list-container {
+    transform: rotate(0);
+    width: 100%;
+  }
+  .student-add-form {
+    width: 100%;
+  }
+  .student-list-container {
+    text-align: left;
+  }
+  .page-header > h1 > small {
+    position: static;
+  }
+
+}
+
+@media only screen and (max-width: 990px) {
+  h1 {
+    display: none;
+  }
+  .page-header > h3 {
+    display: block;
+  }
+  .page-header > h3 > small {
+    position: absolute;
+    right: 5%;
+  }
+}
