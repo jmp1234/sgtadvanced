@@ -153,8 +153,8 @@ class SGT_template{
 	getStudents() {
 		var sgt = this;
 		var ajaxOptions = {
-			url: 'http://s-apis.learningfuze.com/sgt/get',
-			method: 'post',
+			url: 'api/grades',
+			method: 'get',
 			data: {
 				'api_key': '7uS1nWx4hT',
 			},
