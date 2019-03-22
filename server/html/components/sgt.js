@@ -187,7 +187,7 @@ class SGT_template{
 	sendStudentDataToServer(name, course, grade) {
 		var sgt = this;
 		var ajaxOptions = {
-			url: 'http://s-apis.learningfuze.com/sgt/create',
+			url: 'api/grades',
 			method: 'post',
 			data: {
 				'api_key': '7uS1nWx4hT',
@@ -217,12 +217,8 @@ class SGT_template{
 	deleteFromDatabase(id) {
 		var sgt = this;
 		var ajaxOptions = {
-			url: 'http://s-apis.learningfuze.com/sgt/delete',
-			method: 'post',
-			data: {
-				'api_key': '7uS1nWx4hT',
-				'student_id': id,
-			},
+			url: 'api/grades?student_id=' + id,
+			method: 'delete',
 			dataType: 'json',
 			success: function(response) {
 				if(response.success) {
