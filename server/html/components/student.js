@@ -52,13 +52,13 @@ class Student{
 		if(field === 'name' || field === 'grade' || field === 'course') {
 			if(field === 'grade') {
 				this.data[field] = parseInt(data);
-				this.domElements.grade.text(this.data[field])
+				this.domElements.grade.text(this.data[field]);
 			} else if(field === 'name'){
 				this.data[field] = data;
-				this.domElements.name.text(this.data[field])
+				this.domElements.name.text(this.data[field]);
 			} else {
 				this.data[field] = data;
-				this.domElements.course.text(this.data[field])
+				this.domElements.course.text(this.data[field]);
 			}
 
 			return true;
@@ -122,7 +122,7 @@ class Student{
 	ESTIMATED TIME: 15 minutes
 	*/
 	handleDelete(){
-		this.deleteCallback(this.data.id);
-		$(this.domElements.row).remove();
+		this.deleteCallback(this.data.id, this.domElements.row);
+		// $(this.domElements.row).remove();
 	}
 }

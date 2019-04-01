@@ -3,14 +3,18 @@
 const express = require('express'); //load the express library into the file
 const mysql = require('mysql');
 const mysqlcredentials = require('./mysqlcreds.js');//load the credentials from a local file for mysql
+const cors = require('cors');
 //using the credentials that we loaded, establish a preliminary connection to the database
 const db = mysql.createConnection( mysqlcredentials )
 
 const server = express(); //you now have a server! express is running node
 
+
+server.use(cors());
 server.use( express.static( __dirname + '/html' ) ); //middleware //looks in the html folder for a file called index.html, and grabs that file and serves it
 server.use( express.urlencoded( { extended: false } )) //have express pull body data that is urlencoded and place it into an object called body
 //when using Axios: use server.use(express.json())
+server.use(express.json());
 
 //ex: in the url, I can add /components/students.js to read that file on the browser
 
@@ -81,9 +85,9 @@ server.post( '/api/grades', ( request, response ) => {
   })
 })
 
-server.delete( '/api/grades', ( request, response ) => {
+server.delete( '/api/grades/:student_id', ( request, response ) => {
 
-  if(request.query.student_id === undefined) {
+  if(request.params.student_id === undefined) {
     response.send({
       success: false,
       error: 'must provide a student id for delete'
@@ -91,7 +95,7 @@ server.delete( '/api/grades', ( request, response ) => {
     return;
   }
   db.connect( () => {
-    const query = 'DELETE FROM `grades` WHERE `id`= ' + request.query.student_id;
+    const query = 'DELETE FROM `grades` WHERE `id`= ' + request.params.student_id;
     db.query( query, ( error, result) => {
       if(!error) {
         response.send({

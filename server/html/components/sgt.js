@@ -128,10 +128,10 @@ class SGT_template{
 		}
 	}
 
-	deleteStudent(id){
+	deleteStudent(id, domElementRow){
 
 		if(this.doesStudentExist(id)) {
-			this.deleteFromDatabase(id)
+			this.deleteFromDatabase(id, domElementRow)
 			delete this.data[id];
 			return true;
 		}
@@ -214,7 +214,7 @@ class SGT_template{
 
 	}
 
-	deleteFromDatabase(id) {
+	deleteFromDatabase(id, domElementRow) {
 		var sgt = this;
 		var ajaxOptions = {
 			url: 'api/grades?student_id=' + id,
@@ -223,6 +223,7 @@ class SGT_template{
 			success: function(response) {
 				if(response.success) {
 					console.log('deleted from database')
+					$(domElementRow).remove();
 				} else {
 					console.log(response.errors);
 					sgt.showErrorModal(response)
